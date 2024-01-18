@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_project/color/all_colors.dart';
+import 'package:test_project/data/users/user_data.dart';
 import 'package:test_project/presentations/user_presentation/info_user_page.dart';
-
-import '../../data/users/user_data.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -11,62 +12,89 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  late Future<List<User>> userList;
-
-  @override
-  void initState() {
-    super.initState();
-    userList = getUsersList();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Posts Module'),
-      ),
-      body: FutureBuilder<List<User>>(
-        future: userList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              InfoUserPage(user: snapshot.data![index]),
+    return MultiProvider(
+      providers: [
+        FutureProvider<List<User>>(
+          create: (_) => getUsersList(),
+          initialData: [],
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: ColorSelect().cproject,
+          title: const Text('User Module'),
+        ),
+        body: Consumer<List<User>>(
+          builder: (context, userList, child) {
+            if (userList.isEmpty) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return ListView.builder(
+                itemCount: userList.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InfoUserPage(user: userList[index]),
+                          ),
+                        );
+                      },
+                      leading: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: ColorSelect().cproject,
+                        child: Text(
+                          userList[index].name![0].toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
-                      );
-                    },
-                    leading: Icon(Icons.supervised_user_circle_outlined),
-                    title: Text(snapshot.data![index].name),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("email :${snapshot.data![index].email}"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text("Id : ${snapshot.data![index].id}"),
-                      ],
+                      ),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: ColorSelect().cproject,
+                          ),
+                        ],
+                      ),
+                      title: Text(
+                        userList[index].name,
+                        style: TextStyle(
+                            color: ColorSelect().ctextT,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "email :${userList[index].email}",
+                            style: TextStyle(color: ColorSelect().ctext),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Id : ${userList[index].id}",
+                            style: TextStyle(color: ColorSelect().ctext),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
-          }
-        },
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }

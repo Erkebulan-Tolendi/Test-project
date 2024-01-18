@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../data/users/user_data.dart';
+import 'package:test_project/color/all_colors.dart';
+import 'package:test_project/data/users/user_data.dart';
 
 class InfoUserPage extends StatelessWidget {
   final User user;
@@ -11,57 +11,105 @@ class InfoUserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details'),
+        backgroundColor: ColorSelect().cproject,
+        title: Text(
+          'User Details',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      body: ListView(children: [
-        Column(
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 20,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 60,
+              backgroundColor: ColorSelect().cproject,
+              child: Text(
+                user.name![0].toUpperCase(),
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
-            Icon(
-              Icons.supervised_user_circle_outlined,
-              size: 70,
+            SizedBox(height: 20),
+            Text(
+              user.name!,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "ID: ${user.id}",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            Divider(height: 20, thickness: 2),
+            Text(
+              'Email:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              user.email!,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Address:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              "${user.address!.street}, ${user.address!.suite}, ${user.address!.city}, ${user.address!.zipcode}",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Contacts:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              user.phone!,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Website:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              user.website!,
+              style: TextStyle(
+                fontSize: 18,
+              ),
             ),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-              Text(
-                'Name: ${user.name}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              Text('User Id: ${user.id}', style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-              Text('Description: ${user.email}',
-                  style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-              Text('Description: ${user.phone}',
-                  style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-              Text(
-                  'Addres: city ${user.address.city}, geo lat ${user.address.geo.lat}, geo lng ${user.address.geo.lng}, street ${user.address.street}, suite ${user.address.suite}, zipcode ${user.address.zipcode}',
-                  style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-              Text('User Name: ${user.username}',
-                  style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-              Text('Website: ${user.website}', style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-              Text(
-                  'Company: name ${user.company.name}, bs ${user.company.bs}, catch phrase ${user.company.catchPhrase}',
-                  style: TextStyle(fontSize: 16)),
-              const SizedBox(height: 10),
-            ],
-          ),
-        ),
-      ]),
+      ),
     );
   }
 }

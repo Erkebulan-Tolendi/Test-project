@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_project/color/all_colors.dart';
 import 'package:test_project/data/photo/photo_album_data.dart';
 import 'package:test_project/presentations/album_presentation/info_album_page.dart';
 
@@ -10,58 +12,78 @@ class AlbumPage extends StatefulWidget {
 }
 
 class _AlbumPageState extends State<AlbumPage> {
-  late Future<List<Album>> albumList;
-  @override
-  void initState() {
-    albumList = getAlbumList();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Album Page"),
-      ),
-      body: FutureBuilder<List<Album>>(
-        future: albumList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  InfoAlbumPage(album: snapshot.data![index]),
-                            ));
-                      },
-                      title: Text(snapshot.data![index].title),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Id: ${snapshot.data![index].id}"),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text("User ID: ${snapshot.data![index].userId}")
-                        ],
+    return MultiProvider(
+      providers: [
+        FutureProvider<List<Album>>(
+            create: (_) => getAlbumList(), initialData: [])
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: ColorSelect().cproject,
+          title: Text("Album Module"),
+        ),
+        body: Consumer<List<Album>>(
+          builder: (context, albumList, child) {
+            if (albumList.isEmpty) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return ListView.builder(
+                  itemCount: albumList.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    InfoAlbumPage(album: albumList[index]),
+                              ));
+                        },
+                        leading: Icon(
+                          Icons.image_outlined,
+                          color: ColorSelect().cproject,
+                          size: 40,
+                        ),
+                        trailing: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: ColorSelect().cproject,
+                            ),
+                          ],
+                        ),
+                        title: Text(
+                          albumList[index].title,
+                          style: TextStyle(
+                              color: ColorSelect().ctextT,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Id: ${albumList[index].id}",
+                              style: TextStyle(color: ColorSelect().ctext),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "User ID: ${albumList[index].userId}",
+                              style: TextStyle(color: ColorSelect().ctext),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                });
-          }
-        },
+                    );
+                  });
+            }
+          },
+        ),
       ),
     );
   }

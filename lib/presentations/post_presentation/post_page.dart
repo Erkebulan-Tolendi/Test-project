@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_project/color/all_colors.dart';
 import 'package:test_project/data/post/posts_data.dart';
 import 'package:test_project/presentations/post_presentation/info_page.dart';
 
@@ -10,61 +12,78 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  late Future<List<Post>> postsList;
-
-  @override
-  void initState() {
-    super.initState();
-    postsList = getPostsList();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Posts Module'),
-      ),
-      body: FutureBuilder<List<Post>>(
-        future: postsList,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              InfoPage(post: snapshot.data![index]),
-                        ),
-                      );
-                    },
-                    title: Text(snapshot.data![index].title),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("User Id :${snapshot.data![index].userId}"),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text("Body: ${snapshot.data![index].body}"),
-                      ],
+    return MultiProvider(
+      providers: [
+        FutureProvider<List<Post>>(
+            create: (_) => getPostsList(), initialData: [])
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: ColorSelect().cproject,
+          title: const Text('Posts Module'),
+        ),
+        body: Consumer<List<Post>>(
+          builder: (context, postList, child) {
+            if (postList.isEmpty) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return ListView.builder(
+                itemCount: postList.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                InfoPage(post: postList[index]),
+                          ),
+                        );
+                      },
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: ColorSelect().cproject,
+                          ),
+                        ],
+                      ),
+                      title: Text(
+                        postList[index].title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: ColorSelect().ctextT),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Id :${postList[index].id}",
+                            style: TextStyle(color: ColorSelect().ctext),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Body: ${postList[index].body}",
+                            style: TextStyle(color: ColorSelect().ctext),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
-          }
-        },
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }

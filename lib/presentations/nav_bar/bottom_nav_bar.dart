@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/color/all_colors.dart';
 import 'package:test_project/presentations/album_presentation/album_page.dart';
 import 'package:test_project/presentations/cases_presentation/cases_page.dart';
 import 'package:test_project/presentations/post_presentation/post_page.dart';
@@ -23,49 +24,53 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: scrrens[index],
-        bottomNavigationBar: NavigationBarTheme(
-          data: NavigationBarThemeData(
-            indicatorColor: Colors.blue.shade100,
-            labelTextStyle: MaterialStateProperty.all(
-                TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-          ),
-          child: NavigationBar(
-            height: 60,
-            selectedIndex: index,
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            animationDuration: Duration(seconds: 1),
-            onDestinationSelected: (index) =>
-                setState(() => this.index = index),
-            destinations: [
-              NavigationDestination(
-                icon: Icon(
-                  Icons.post_add,
-                ),
-                label: "Post",
+    return Scaffold(
+      body: scrrens[index],
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          backgroundColor: ColorSelect().cproject,
+          indicatorColor: ColorSelect().cbuttons,
+          labelTextStyle: MaterialStateProperty.all(TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: ColorSelect().cnavBut)),
+        ),
+        child: NavigationBar(
+          height: 60,
+          selectedIndex: index,
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          animationDuration: Duration(seconds: 1),
+          onDestinationSelected: (index) => setState(() => this.index = index),
+          destinations: [
+            NavigationDestination(
+              icon: Icon(
+                Icons.post_add,
+                color: ColorSelect().cnavBut,
               ),
-              NavigationDestination(
-                icon: Icon(
-                  Icons.cases_rounded,
-                ),
-                label: "Cases",
+              label: "Post",
+            ),
+            NavigationDestination(
+              icon: Icon(
+                Icons.cases_rounded,
+                color: ColorSelect().cnavBut,
               ),
-              NavigationDestination(
-                icon: Icon(
-                  Icons.photo_album_outlined,
-                ),
-                label: "Album",
+              label: "Cases",
+            ),
+            NavigationDestination(
+              icon: Icon(
+                Icons.photo_album_outlined,
+                color: ColorSelect().cnavBut,
               ),
-              NavigationDestination(
-                icon: Icon(
-                  Icons.supervised_user_circle_outlined,
-                ),
-                label: "User",
+              label: "Album",
+            ),
+            NavigationDestination(
+              icon: Icon(
+                Icons.supervised_user_circle_outlined,
+                color: ColorSelect().cnavBut,
               ),
-            ],
-          ),
+              label: "User",
+            ),
+          ],
         ),
       ),
     );
