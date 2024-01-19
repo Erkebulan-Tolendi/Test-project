@@ -1,20 +1,20 @@
 This is Test project 
 ## Post Model 
-![photo_3_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/51ff36ef-7355-4666-8cb0-7f2b985824b8)
-![photo_8_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/b77fb02e-bf84-4700-a122-417e901b39d2)
+![post1](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/335ccd9d-313d-4210-acc1-d5ce1dd75df8)
+![post2](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/d8207b29-1440-4b02-9c57-fb7c62e78196)
+
 
 ## Cases Model
-![Снимок экрана (14)](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/bb47b559-22ba-4de7-8099-30e60bebfab4)
-![Снимок экрана (16)](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/f85d60a0-805a-4d39-b929-27a69227833c)
-![Снимок экрана (15)](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/4652e2cf-7f49-4ec2-8a1b-2c3e23b4a7c8)
+![cases](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/1a3b8240-fe66-412a-b831-82fc6a2aea85)
+![cases2](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/839e6cc1-7617-49ce-9985-9c89bef566d0)
+![cases3](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/75a0ae27-b625-40a6-b1c4-ab4bd52f23a7)
+![casesfil](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/06f554ff-2a3f-4c1e-94af-1da594d6dc36)
 
 ## Album Model
-![photo_1_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/5fa0d0dc-0151-4647-bc0b-5b6328cc5696)
-![photo_2_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/0b14a2b7-c176-4eee-acb9-845b08524e8b)
-
+![albumphoto](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/17d3a26c-9c23-4827-b8d6-a7d3519c25ac)
+![album2](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/17477fb9-70fd-474b-943c-87b80aaaf7f5)
+![album](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/a55961ba-528e-4957-97ea-a454f869a1e6)
 ## User Model
-![photo_4_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/ea78593c-8e1f-4a6e-bbcc-da4402f52919)
-![photo_5_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/59be512e-6e4d-4117-abf6-24862f817dfc)
-![photo_7_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/743af0e5-92eb-4433-a30e-2a1f7b632eaf)
-![photo_6_2024-01-19_12-11-43](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/e273fc0f-7df7-42fa-a5d8-d323dab82deb)
-
+![user3](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/dc155d17-1ddb-4588-a239-dc23bfd7b8d2)
+![user2](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/96b67cfd-7ea6-4110-acfa-8698346adb29)
+![user1](https://github.com/Erkebulan-Tolendi/Test-project/assets/121281861/38f07c15-88ab-4049-9339-205ecdee215e)
